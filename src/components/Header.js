@@ -29,6 +29,9 @@ const Header = () => {
           <li>
             <Cart />
           </li>
+          <li>
+            <button onClick={logout} className="logout-btn">Logout</button>{" "}
+          </li>
         </ul>
       </nav>
     </header>
