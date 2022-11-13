@@ -3,12 +3,12 @@ import "./App.css";
 import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import Notification from "./components/Notification";
-import uiActions from "./store/ui-slice";
+import { uiActions } from "./store/ui-slice";
 
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 
-//let isFirstRender = true;
+let isFirstRender = true;
 
 function App() {
   const dispatch = useDispatch();
@@ -22,10 +22,10 @@ function App() {
   const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); 
   useEffect(()=> {
-    /*if (isFirstRender) {
+    if (isFirstRender) {
       isFirstRender = false;
       return;
-    }*/
+    }
     const sendRequest = async () => {
       dispatch(uiActions.showNotification({
         open: true,
