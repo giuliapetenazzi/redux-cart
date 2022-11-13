@@ -32,9 +32,11 @@ function App() {
         message: "Sending request",
         type: 'warning'
       }));
-      const res = await fetch('', {
+      const res = await fetch(
+        'https://giulia-http-redux-cart-default-rtdb.firebaseio.com/cartitems.json',
+      {
         method: 'PUT',
-        body: JSON.stringify(cart),
+        body: JSON.stringify(cart)
       });
       const data = await res.json();
       uiActions.showNotification({
@@ -50,7 +52,7 @@ function App() {
         type: 'error'
       }));
     });
-  });
+  }, [cart]);
   return (
     <div className="App">
         { notification && 
