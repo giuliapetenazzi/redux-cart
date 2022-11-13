@@ -3,7 +3,7 @@ import "./App.css";
 import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import Notification from "./components/Notification";
-import { uiActions } from "./store/ui-slice";
+import { fetchData, sendCartData } from "./store/cart-actions";
 
 import { useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
@@ -26,33 +26,7 @@ function App() {
       isFirstRender = false;
       return;
     }
-    const sendRequest = async () => {
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sending request",
-        type: 'warning'
-      }));
-      const res = await fetch(
-        'https://giulia-http-redux-cart-default-rtdb.firebaseio.com/cartitems.json',
-        {
-          method: 'PUT',
-          body: JSON.stringify(cart)
-        }
-      );
-      const data = await res.json();
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sent request to database successfully",
-        type: 'success'
-      }));
-    };
-    sendRequest().catch((err) => {
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sending requestfailed",
-        type: 'error'
-      }));
-    });
+    dispatch(sendCartData(cart));
   }, [cart]);
   return (
     <div className="App">
