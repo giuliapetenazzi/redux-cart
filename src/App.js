@@ -34,16 +34,17 @@ function App() {
       }));
       const res = await fetch(
         'https://giulia-http-redux-cart-default-rtdb.firebaseio.com/cartitems.json',
-      {
-        method: 'PUT',
-        body: JSON.stringify(cart)
-      });
+        {
+          method: 'PUT',
+          body: JSON.stringify(cart)
+        }
+      );
       const data = await res.json();
-      uiActions.showNotification({
+      dispatch(uiActions.showNotification({
         open: true,
         message: "Sent request to database successfully",
         type: 'success'
-      })
+      }));
     };
     sendRequest().catch((err) => {
       dispatch(uiActions.showNotification({
