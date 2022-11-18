@@ -5,12 +5,13 @@ export const fetchData = () => {
   return async(dispatch) => {
 
     const fetchHandler = async() => {
-      const res = await fetch("https://redux-http-bc782-default-rtdb.firebaseio.com/cartItems.json");
+      const res = await fetch("https://giulia-http-redux-cart-default-rtdb.firebaseio.com/cartItems.json");
       const data = await res.json();
       return data;
     };
     try {
       const cartData = await fetchHandler();
+      console.log("🚀 ~ cartData", cartData)
       dispatch(cartActions.replaceData(cartData));
     } catch (e) {
       dispatch(
@@ -37,7 +38,7 @@ export const sendCartData = (cart) => {
         // Send state as Sending request
   
         const res = await fetch(
-          "https://redux-http-bc782-default-rtdb.firebaseio.com/cartItems.json",
+          "https://giulia-http-redux-cart-default-rtdb.firebaseio.com/cartItems.json",
           {
             method: "PUT",
             body: JSON.stringify(cart),

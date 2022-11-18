@@ -20,14 +20,21 @@ function App() {
   */
 
   const cart = useSelector((state) => state.cart);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); 
-  useEffect(()=> {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isFirstRender) {
       isFirstRender = false;
       return;
     }
-    dispatch(sendCartData(cart));
-  }, [cart]);
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
+  
   return (
     <div className="App">
         { notification && 
