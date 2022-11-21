@@ -2,41 +2,38 @@ import React from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { authActions } from "../store/auth-slice";
 
-import "./Auth.css";
+import "./Reg.css";
 
-const Auth = () => {
+const Reg = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch
-    dispatch(authActions.login());
+    dispatch(authActions.register());
   };
-  const goToRegistration = (e) => {
+  const backToLogin = (e) => {
     e.preventDefault();
     // dispatch
-    dispatch(authActions.goToRegistration());
+    dispatch(authActions.backToLogin());
   };
-  const isRegistering = useSelector((state) => state.auth.isRegistering);
-
+ 
   return (
       <div className="container">
-        <h1>Login</h1>{" "}
+        <h1>Sign in</h1>{" "}
         <form onSubmit={handleSubmit}>
           <label htmlFor="id">Id</label>
           <input type="text" name="id" id="id" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <button className="login-btn" type="submit">
-            Login
+          <button className="login-btn">
+            Save
           </button>
         </form>
-        {
-          !isRegistering && <button onClick={goToRegistration}>
-              Go to sign in
-          </button>
-        }
-        </div>
+        <button onClick={backToLogin}>
+          Back to login
+        </button>
+      </div>
   );
 };
 
-export default Auth;
+export default Reg;
